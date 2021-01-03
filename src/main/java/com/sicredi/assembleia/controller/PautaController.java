@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sicredi.assembleia.dto.ResultadoVotacao;
+import com.sicredi.assembleia.model.Pauta;
 import com.sicredi.assembleia.service.PautaService;
 import com.sicredi.assembleia.service.ResultadoVotacaoService;
 
@@ -27,15 +29,13 @@ public class PautaController {
 	@Autowired
 	private ResultadoVotacaoService resultadoVotacaoService;
 
-	@SuppressWarnings("rawtypes")
 	@PostMapping
-	public ResponseEntity cadastrarPauta(@RequestParam("assunto") @NotNull @NotEmpty String assunto) {
+	public ResponseEntity<Pauta> cadastrarPauta(@RequestParam("assunto") @NotNull @NotEmpty String assunto) {
 		return ResponseEntity.ok(pautaService.cadastrarPauta(assunto));
 	}
 
-	@SuppressWarnings("rawtypes")
 	@GetMapping("/{pautaId}")
-	public ResponseEntity consultarResultado(@PathVariable("pautaId") @NotNull Long pautaId) {
+	public ResponseEntity<ResultadoVotacao> consultarResultado(@PathVariable("pautaId") @NotNull Long pautaId) {
 		return ResponseEntity.ok(resultadoVotacaoService.consultarResultado(pautaId));
 	}
 

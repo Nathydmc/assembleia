@@ -51,6 +51,13 @@
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>br.com.caelum.stella</groupId>
+			<artifactId>caelum-stella-core</artifactId>
+			<version>2.1.4</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

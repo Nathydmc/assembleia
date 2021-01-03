@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sicredi.assembleia.model.Voto;
 import com.sicredi.assembleia.service.VotoService;
 
 @RestController
@@ -20,9 +21,8 @@ public class VotoController {
 	@Autowired
 	private VotoService votoService;
 
-	@SuppressWarnings("rawtypes")
 	@PostMapping
-	public ResponseEntity votar(@RequestParam("pautaId") @NotNull Long pautaId,
+	public ResponseEntity<Voto> votar(@RequestParam("pautaId") @NotNull Long pautaId,
 			@RequestParam("associadoId") @NotNull Long associadoId, @RequestParam("voto") @NotNull boolean voto) {
 		return ResponseEntity.ok(votoService.votar(pautaId, associadoId, voto));
 	}

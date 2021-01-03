@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sicredi.assembleia.model.Associado;
 import com.sicredi.assembleia.service.AssociadoService;
 
 @RestController
@@ -21,9 +22,8 @@ public class AssociadoController {
 	@Autowired
 	private AssociadoService associadoService;
 
-	@SuppressWarnings("rawtypes")
 	@PostMapping
-	public ResponseEntity cadastrarAssociado(@RequestParam("cpf") @NotNull @NotBlank String cpf,
+	public ResponseEntity<Associado> cadastrarAssociado(@RequestParam("cpf") @NotNull @NotBlank String cpf,
 			@RequestParam("nome") @NotNull @NotBlank String nome) {
 		return ResponseEntity.ok(associadoService.cadastrarAssociado(cpf, nome));
 	}
