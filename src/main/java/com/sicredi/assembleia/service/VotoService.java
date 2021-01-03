@@ -21,25 +21,25 @@ public class VotoService {
 	@Autowired
 	private AssociadoService associadoService;
 
-	public Voto votar(Long pautaId, Long associadoId, boolean voto){
+	public Voto votar(Long pautaId, Long associadoId, boolean voto) {
 		validarVoto(pautaId, associadoId);
 		return votoRepository.save(Voto.builder().associadoId(associadoId).pautaId(pautaId).aprova(voto).build());
 	}
 
-	private void validarVoto(Long pautaId, Long associadoId) {
+	protected void validarVoto(Long pautaId, Long associadoId) {
 		pautaService.validarPauta(pautaId);
 		associadoService.validarAssociado(associadoId);
 		validarVotoJaComputado(pautaId, associadoId);
 	}
 
-	private void validarVotoJaComputado(Long pautaId, Long associadoId) {
+	protected void validarVotoJaComputado(Long pautaId, Long associadoId) {
 		if (votoRepository.existsByPautaIdAndAssociadoId(pautaId, associadoId)) {
 			throw new BusinessException(HttpStatus.NOT_ACCEPTABLE, "Associado já votou na pauta.");
 		}
 	}
-	
+
 	public CompiladoVotos consultarVotosCompilados(Long pautaId) {
-		return votoRepository.consultarVotosCompilados(pautaId);				
+		return votoRepository.consultarVotosCompilados(pautaId);
 	}
 
 }

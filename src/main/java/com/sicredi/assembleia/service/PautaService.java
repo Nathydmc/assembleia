@@ -41,7 +41,7 @@ public class PautaService {
 		timer.schedule(task, delay);
 	}
 
-	public void encerrarPauta(Pauta pauta) {
+	protected void encerrarPauta(Pauta pauta) {
 		pauta.setVotacaoEmAndamento(Boolean.FALSE);
 		pautaRepository.save(pauta);
 	}

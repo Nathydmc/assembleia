@@ -26,11 +26,11 @@ public class ResultadoVotacaoService {
 				.resultado(calculaResultado(votosDTO)).status(defineStatus(pauta)).build();
 	}
 
-	private StatusVotacao defineStatus(Pauta pauta) {
+	protected StatusVotacao defineStatus(Pauta pauta) {
 		return pauta.isVotacaoEmAndamento() ? StatusVotacao.ABERTA : StatusVotacao.ENCERRADA;
 	}
 
-	private StatusResultado calculaResultado(CompiladoVotos votosDTO) {
+	protected StatusResultado calculaResultado(CompiladoVotos votosDTO) {
 		if (votosDTO.getQuantVotosFavoraveis() > votosDTO.getQuantVotosContra()) {
 			return StatusResultado.APROVADO;
 		} else if (votosDTO.getQuantVotosFavoraveis() < votosDTO.getQuantVotosContra()) {
