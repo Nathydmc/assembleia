@@ -1,7 +1,5 @@
 package com.sicredi.assembleia.service;
 
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,7 @@ public class AssociadoService {
 
 	@Autowired
 	private VoteAuthorizationClient voteAuthorization;
-	
+
 	private CPFValidator cpfValidator = new CPFValidator();
 
 	public Associado cadastrarAssociado(String cpf, String nome) {
@@ -38,10 +36,8 @@ public class AssociadoService {
 	}
 
 	public void validarAssociado(Long associadoId) {
-		Associado associado = associadoRepository.findById(associadoId).orElse(null);
-		if (Objects.isNull(associado)) {
-			throw new BusinessException(HttpStatus.NOT_FOUND, "Associado não encontrado.");
-		}
+		Associado associado = associadoRepository.findById(associadoId)
+				.orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "Associado não encontrado."));
 		voteAuthorization.validarPorCpf(associado.getCpf());
 	}
 

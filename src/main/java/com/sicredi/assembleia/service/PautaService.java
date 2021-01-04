@@ -1,8 +1,6 @@
 package com.sicredi.assembleia.service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,6 +12,9 @@ import com.sicredi.assembleia.exception.BusinessException;
 import com.sicredi.assembleia.model.Pauta;
 import com.sicredi.assembleia.repository.PautaRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class PautaService {
 
@@ -23,6 +24,7 @@ public class PautaService {
 	public Pauta cadastrarPauta(String assunto) {
 		Pauta pauta = pautaRepository.save(Pauta.builder().assunto(assunto).inicioSessao(LocalDateTime.now())
 				.votacaoEmAndamento(Boolean.TRUE).build());
+		log.info("Abertura da Pauta de id {}", pauta.getId());
 		agendarEncerramentoPauta(pauta);
 		return pauta;
 	}
@@ -31,8 +33,7 @@ public class PautaService {
 		TimerTask task = new TimerTask() {
 			public void run() {
 				encerrarPauta(pauta);
-				System.out.println("Task performed on: " + new Date() + "n" + "Thread's name: "
-						+ Thread.currentThread().getName());
+				log.info(Thread.currentThread().getName());
 			}
 		};
 		Timer timer = new Timer("Encerramento da Pauta de id " + pauta.getId());
@@ -45,7 +46,7 @@ public class PautaService {
 		pauta.setVotacaoEmAndamento(Boolean.FALSE);
 		pautaRepository.save(pauta);
 	}
-	
+
 	public void validarPauta(Long pautaId) {
 		Pauta pauta = consultarPauta(pautaId);
 		if (!pauta.isVotacaoEmAndamento()) {
@@ -54,11 +55,8 @@ public class PautaService {
 	}
 
 	public Pauta consultarPauta(Long pautaId) {
-		Pauta pauta = pautaRepository.findById(pautaId).orElse(null);
-		if (Objects.isNull(pauta)) {
-			throw new BusinessException(HttpStatus.NOT_FOUND, "Pauta não encontrada.");
-		}
-		return pauta;
+		return pautaRepository.findById(pautaId)
+				.orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "Pauta não encontrada."));
 	}
 
 }
