@@ -21,13 +21,14 @@ Projeto criado para auxiliar a votação de Pautas em uma Assembléia.
 
 ## 6. Endpoints
  - Cadastro de Associado\
-**POST** /voto\
+**POST** /associado\
 **Parâmetros:** \
 cpf (tipo: query, obrigatório: sim)\
 nome (tipo: query, obrigatório: sim)\
 **Exemplo:** /associado?cpf=35339898016&nome=Jose\
 **Responses:**\
 200 - OK - Associado cadastrado com sucesso.\
+400 - BAD REQUEST - Cpf inválido.
 406 - NOT ACCEPTABLE - Já existe usuário com Cpf cadastrado no sistema.
 
 - Cadastro de Pauta\
