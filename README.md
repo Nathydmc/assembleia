@@ -58,3 +58,19 @@ pautaId (tipo: path, obrigatório: sim) \
 **Responses:**
 200 - OK - Consulta realizada com sucesso.\
 404 - NOT FOUND - Pauta não encontrada.
+
+## 7. Versionamento da API
+A sugestão para o versionamento da API seria adicionar a versão na URI, de forma a manter as funcionalidades antigas e disponibilizar as novas através da troca de versão, não impactando os consumidores de versões anteriores da aplicação. Por exemplo: https://assembleia-dev.herokuapp.com/v1/associado e https://assembleia-dev.herokuapp.com/v2/associado.
+
+## 8. Considerações
+
+- O código foi organizado em pacotes conforme responsabilidade das classes, de forma a facilitar o entendimento;
+- Toda a camada de serviço foi coberta por testes unitários e também foram feitos testes funcionais através da ferramenta Postman, como formas de evitar bugs e garantir a qualidade da aplicação;
+- Optou-se pela utilização do Spring Boot para facilitar o processo de configuração do projeto, promovendo a otimização do tempo disponível para a realização do desafio;
+- O Heroku foi escolhido pela simplicidade e facilidade provida em disponibilizar aplicações na nuvem e também por ser gratuito;
+- Foi criada uma exceção personalizada (BusinessException), utilizada exclusivamente para erros que infringem regras de negócio, assim como ExceptionHandlers, proporcionando respostas personalizadas que fazem mais sentido ao usuário. 
+
+## 9. Melhorias a serem feitas
+- Implementação de testes de integração entre camadas através da utilização do Cucumber e BD H2;
+- Utilização de filas para disponibilizar os resultados das votações às aplicações interessadas em consumi-los;
+- Testes de performance para evitar comportamento indesejado da aplicação ao receber várias requisições ao mesmo tempo.
