@@ -17,7 +17,7 @@ Projeto criado para auxiliar a votação de Pautas em uma Assembléia.
 5. Inicie a aplicação através do comando: `mvn spring-boot:run`
 
 ## 5. Rodar testes
-* Run with command: `mvn test`
+* Rode o comando: `mvn test`
 
 ## 6. Endpoints
  - Cadastro de Associado\
