@@ -20,41 +20,41 @@ Projeto criado para auxiliar a votação de Pautas em uma Assembléia.
 * Run with command: `mvn test`
 
 ## 6. Endpoints
- - Cadastro de Associado
-**POST** /voto
-**Parâmetros:** 
-cpf (tipo: query, obrigatório: sim) 
-nome (tipo: query, obrigatório: sim)
-**Exemplo:** /associado?cpf=35339898016&nome=Jose
-**Responses:**
-200 - OK - Associado cadastrado com sucesso.
+ - Cadastro de Associado\
+**POST** /voto\
+**Parâmetros:** \
+cpf (tipo: query, obrigatório: sim)\
+nome (tipo: query, obrigatório: sim)\
+**Exemplo:** /associado?cpf=35339898016&nome=Jose\
+**Responses:**\
+200 - OK - Associado cadastrado com sucesso.\
 406 - NOT ACCEPTABLE - Já existe usuário com Cpf cadastrado no sistema.
 
-- Cadastro de Pauta
-**POST** /pauta
-**Parâmetros:** 
-assunto (tipo: query, obrigatório: sim) 
-**Exemplo:** /pauta?assunto=Assunto da pauta
-**Responses:**
+- Cadastro de Pauta\
+**POST** /pauta\
+**Parâmetros:** \
+assunto (tipo: query, obrigatório: sim) \
+**Exemplo:** /pauta?assunto=Assunto da pauta\
+**Responses:**\
 200 - OK - Pauta cadastrada com sucesso.
 
-- Votação em uma Pauta
-**POST** /voto
-**Parâmetros:** 
-pautaId (tipo: query, obrigatório: sim) 
-associadoId (tipo: query, obrigatório: sim)
-voto (tipo: query, obrigatório: sim, valores aceitos: true/false)
-**Exemplo:** /voto?pautaId=25&associadoId=11&voto=false
-**Responses:**
-200 - OK - Voto cadastrada com sucesso.
-404 - NOT FOUND - Pauta ou associado não encontrado.
+- Votação em uma Pauta\
+**POST** /voto\
+**Parâmetros:** \
+pautaId (tipo: query, obrigatório: sim) \
+associadoId (tipo: query, obrigatório: sim)\
+voto (tipo: query, obrigatório: sim, valores aceitos: true/false)\
+**Exemplo:** /voto?pautaId=25&associadoId=11&voto=false\
+**Responses:**\
+200 - OK - Voto cadastrada com sucesso.\
+404 - NOT FOUND - Pauta ou associado não encontrado.\
 406 - NOT ACCEPTABLE - Votação da pauta já foi encerrada.
 
-- Consulta de resultado da votação da Pauta
-**GET** /pauta/{pautaId}
-**Parâmetros:** 
-pautaId (tipo: path, obrigatório: sim) 
-**Exemplo:**/pauta/1
+- Consulta de resultado da votação da Pauta\
+**GET** /pauta/{pautaId}\
+**Parâmetros:** \
+pautaId (tipo: path, obrigatório: sim) \
+**Exemplo:**/pauta/1\
 **Responses:**
-200 - OK - Consulta realizada com sucesso.
+200 - OK - Consulta realizada com sucesso.\
 404 - NOT FOUND - Pauta não encontrada.
